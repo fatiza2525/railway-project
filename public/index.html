@@ -9,8 +9,8 @@
 <body>
 
 <header>
-  <h1>Gestion ferroviaire</h1>
-  <p>Gestion des sites, dépôts, wagons, conducteurs, trajets, incidents et alertes.</p>
+  <h1>Gestion Wagon</h1>
+  <p>Sites, dépôts, wagons, conducteurs, trajets, incidents, alertes et relations.</p>
 </header>
 
 <div id="layout">
@@ -19,6 +19,7 @@
     <nav>
       <ul>
         <li><a href="#" data-section="welcome">Accueil</a></li>
+
         <li><a href="#" data-section="site">SITE</a></li>
         <li><a href="#" data-section="liste-sites">Liste Sites</a></li>
 
@@ -39,19 +40,24 @@
 
         <li><a href="#" data-section="alerte">ALERTE</a></li>
         <li><a href="#" data-section="liste-alertes">Liste Alertes</a></li>
+
+        <li><a href="#" data-section="stocker">STOCKER</a></li>
+        <li><a href="#" data-section="liste-stocker">Liste Stocker</a></li>
+
+        <li><a href="#" data-section="conduire">CONDUIRE</a></li>
+        <li><a href="#" data-section="liste-conduire">Liste Conduire</a></li>
+
+        <li><a href="#" data-section="effectuer">EFFECTUER</a></li>
+        <li><a href="#" data-section="liste-effectuer">Liste Effectuer</a></li>
       </ul>
     </nav>
   </aside>
 
   <main id="content">
 
-    <!-- ACCUEIL -->
     <section id="welcome">
       <h2>Accueil</h2>
-      <p>Choisissez une entité dans le menu à gauche pour ajouter ou consulter les données.</p>
     </section>
-
-    <!-- =================== SITE =================== -->
     <section id="site">
       <h2>Ajouter un site</h2>
       <form method="post" action="http://localhost:3000/api/sites">
@@ -73,19 +79,18 @@
       <button id="btn-charger-sites">Charger les sites</button>
       <table id="table-sites" border="1">
         <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nom</th>
-          <th>Type</th>
-          <th>Ville</th>
-          <th>Actions</th>
-        </tr>
+          <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Ville</th>
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody></tbody>
       </table>
     </section>
 
-    <!-- =================== DEPOT =================== -->
     <section id="depot">
       <h2>Ajouter un dépôt</h2>
       <form method="post" action="http://localhost:3000/api/depots">
@@ -104,18 +109,16 @@
       <button id="btn-charger-depots">Charger les dépôts</button>
       <table id="table-depots" border="1">
         <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nom dépôt</th>
-          <th>ID site</th>
-          <th>Actions</th>
-        </tr>
+          <tr>
+            <th>ID</th>
+            <th>Nom dépôt</th>
+            <th>ID site</th>
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody></tbody>
       </table>
     </section>
-
-    <!-- =================== WAGON =================== -->
     <section id="wagon">
       <h2>Ajouter un wagon</h2>
       <form method="post" action="http://localhost:3000/api/wagons">
@@ -137,19 +140,17 @@
       <button id="btn-charger-wagons">Charger les wagons</button>
       <table id="table-wagons" border="1">
         <thead>
-        <tr>
-          <th>ID</th>
-          <th>Capacité</th>
-          <th>Statut</th>
-          <th>Type</th>
-          <th>Actions</th>
-        </tr>
+          <tr>
+            <th>ID</th>
+            <th>Capacité</th>
+            <th>Statut</th>
+            <th>Type</th>
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody></tbody>
       </table>
     </section>
-
-    <!-- =================== CONDUCTEUR =================== -->
     <section id="conducteur">
       <h2>Ajouter un conducteur</h2>
       <form method="post" action="http://localhost:3000/api/conducteurs">
@@ -171,19 +172,17 @@
       <button id="btn-charger-conducteurs">Charger les conducteurs</button>
       <table id="table-conducteurs" border="1">
         <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Téléphone</th>
-          <th>Actions</th>
-        </tr>
+          <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Téléphone</th>
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody></tbody>
       </table>
     </section>
-
-    <!-- =================== TRAJET =================== -->
     <section id="trajet">
       <h2>Ajouter un trajet</h2>
       <form method="post" action="http://localhost:3000/api/trajets">
@@ -211,21 +210,19 @@
       <button id="btn-charger-trajets">Charger les trajets</button>
       <table id="table-trajets" border="1">
         <thead>
-        <tr>
-          <th>ID</th>
-          <th>Date départ</th>
-          <th>Date arrivée</th>
-          <th>Distance</th>
-          <th>ID site départ</th>
-          <th>ID site arrivée</th>
-          <th>Actions</th>
-        </tr>
+          <tr>
+            <th>ID</th>
+            <th>Date départ</th>
+            <th>Date arrivée</th>
+            <th>Distance</th>
+            <th>ID site départ</th>
+            <th>ID site arrivée</th>
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody></tbody>
       </table>
     </section>
-
-    <!-- =================== INCIDENT =================== -->
     <section id="incident">
       <h2>Ajouter un incident</h2>
       <form method="post" action="http://localhost:3000/api/incidents">
@@ -251,20 +248,19 @@
       <button id="btn-charger-incidents">Charger les incidents</button>
       <table id="table-incidents" border="1">
         <thead>
-        <tr>
-          <th>ID</th>
-          <th>Date incident</th>
-          <th>Gravité</th>
-          <th>Statut</th>
-          <th>ID wagon</th>
-          <th>Actions</th>
-        </tr>
+          <tr>
+            <th>ID</th>
+            <th>Date incident</th>
+            <th>Gravité</th>
+            <th>Statut</th>
+            <th>ID wagon</th>
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody></tbody>
       </table>
     </section>
 
-    <!-- =================== ALERTE =================== -->
     <section id="alerte">
       <h2>Ajouter une alerte (optionnel)</h2>
       <form method="post" action="http://localhost:3000/api/alertes">
@@ -284,12 +280,99 @@
       <button id="btn-charger-alertes">Charger les alertes</button>
       <table id="table-alertes" border="1">
         <thead>
-        <tr>
-          <th>ID</th>
-          <th>Date alerte</th>
-          <th>ID incident</th>
-          <th>Actions</th>
-        </tr>
+          <tr>
+            <th>ID</th>
+            <th>Date alerte</th>
+            <th>ID incident</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section id="stocker">
+      <h2>Stocker un wagon dans un dépôt</h2>
+      <form method="post" action="http://localhost:3000/api/stocker">
+        <label>ID dépôt :
+          <input type="number" name="id_depot" required>
+        </label>
+        <label>ID wagon :
+          <input type="number" name="id_wagon" required>
+        </label>
+        <button type="submit">Enregistrer relation stocker</button>
+      </form>
+    </section>
+
+    <section id="liste-stocker">
+      <h2>Liste des relations stocker</h2>
+      <button id="btn-charger-stocker">Charger</button>
+      <table id="table-stocker" border="1">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>ID dépôt</th>
+            <th>ID wagon</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section id="conduire">
+      <h2>Conduire (conducteur–wagon)</h2>
+      <form method="post" action="http://localhost:3000/api/conduire">
+        <label>ID conducteur :
+          <input type="number" name="id_conducteur" required>
+        </label>
+        <label>ID wagon :
+          <input type="number" name="id_wagon" required>
+        </label>
+        <button type="submit">Enregistrer conduite</button>
+      </form>
+    </section>
+
+    <section id="liste-conduire">
+      <h2>Liste des conduites</h2>
+      <button id="btn-charger-conduire">Charger</button>
+      <table id="table-conduire" border="1">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>ID conducteur</th>
+            <th>ID wagon</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section id="effectuer">
+      <h2>Effectuer (wagon–trajet)</h2>
+      <form method="post" action="http://localhost:3000/api/effectuer">
+        <label>ID wagon :
+          <input type="number" name="id_wagon" required>
+        </label>
+        <label>ID trajet :
+          <input type="number" name="id_trajet" required>
+        </label>
+        <button type="submit">Enregistrer effectuer</button>
+      </form>
+    </section>
+
+    <section id="liste-effectuer">
+      <h2>Liste des effectuer</h2>
+      <button id="btn-charger-effectuer">Charger</button>
+      <table id="table-effectuer" border="1">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>ID wagon</th>
+            <th>ID trajet</th>
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody></tbody>
       </table>

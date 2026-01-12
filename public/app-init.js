@@ -1,6 +1,3 @@
-// app-init.js
-
-/* ================== NAVIGATION ================== */
 
 function hideAllSections() {
   const sections = document.querySelectorAll("#content section");
@@ -35,7 +32,7 @@ function initSidebarNavigation() {
   });
 }
 
-/* ============ OUTIL GÉNÉRIQUE LISTE + DELETE ============ */
+
 
 function initListeGenerique(config) {
   const { btnId, tableBodySelector, url, idField, colonnes } = config;
@@ -58,14 +55,14 @@ function initListeGenerique(config) {
       data.forEach(item => {
         const tr = document.createElement("tr");
 
-        // colonnes données
+       
         colonnes.forEach(c => {
           const td = document.createElement("td");
           td.textContent = item[c] ?? "";
           tr.appendChild(td);
         });
 
-        // colonne actions
+       
         const tdAction = document.createElement("td");
         const bDel = document.createElement("button");
         bDel.textContent = "Supprimer";
@@ -77,7 +74,7 @@ function initListeGenerique(config) {
         tbody.appendChild(tr);
       });
 
-      // click sur Supprimer
+      
       const buttons = tbody.querySelectorAll(".btn-supprimer");
       buttons.forEach(b => {
         b.addEventListener("click", async () => {
@@ -107,11 +104,11 @@ function initListeGenerique(config) {
   btn.addEventListener("click", charger);
 }
 
-/* ================== INIT LISTES ================== */
+
 
 function initToutesLesListes() {
 
-  // SITE
+ 
   initListeGenerique({
     btnId: "btn-charger-sites",
     tableBodySelector: "#table-sites tbody",
@@ -120,7 +117,6 @@ function initToutesLesListes() {
     colonnes: ["id_site", "nom_site", "type_site", "ville"]
   });
 
-  // DEPOT
   initListeGenerique({
     btnId: "btn-charger-depots",
     tableBodySelector: "#table-depots tbody",
@@ -129,7 +125,7 @@ function initToutesLesListes() {
     colonnes: ["id_depot", "nom_depot", "id_site"]
   });
 
-  // WAGON
+
   initListeGenerique({
     btnId: "btn-charger-wagons",
     tableBodySelector: "#table-wagons tbody",
@@ -138,7 +134,7 @@ function initToutesLesListes() {
     colonnes: ["id_wagon", "capacite", "statut", "type"]
   });
 
-  // CONDUCTEUR
+ 
   initListeGenerique({
     btnId: "btn-charger-conducteurs",
     tableBodySelector: "#table-conducteurs tbody",
@@ -147,7 +143,7 @@ function initToutesLesListes() {
     colonnes: ["id_conducteur", "nom", "prenom", "telephone"]
   });
 
-  // TRAJET
+  
   initListeGenerique({
     btnId: "btn-charger-trajets",
     tableBodySelector: "#table-trajets tbody",
@@ -163,7 +159,6 @@ function initToutesLesListes() {
     ]
   });
 
-  // INCIDENT
   initListeGenerique({
     btnId: "btn-charger-incidents",
     tableBodySelector: "#table-incidents tbody",
@@ -172,7 +167,6 @@ function initToutesLesListes() {
     colonnes: ["id_incident", "date_incident", "gravite", "statut", "id_wagon"]
   });
 
-  // ALERTE
   initListeGenerique({
     btnId: "btn-charger-alertes",
     tableBodySelector: "#table-alertes tbody",
@@ -181,8 +175,31 @@ function initToutesLesListes() {
     colonnes: ["id_alerte", "date_alerte", "id_incident"]
   });
 }
+  initListeGenerique({
+    btnId: "btn-charger-stocker",
+    tableBodySelector: "#table-stocker tbody",
+    url: "http://localhost:3000/api/stocker",
+    idField: "id_stocker",
+    colonnes: ["id_stocker", "id_depot", "id_wagon"]
+  });
 
-/* ================== DOM READY ================== */
+  initListeGenerique({
+    btnId: "btn-charger-conduire",
+    tableBodySelector: "#table-conduire tbody",
+    url: "http://localhost:3000/api/conduire",
+    idField: "id_conduite",
+    colonnes: ["id_conduite", "id_conducteur", "id_wagon"]
+  });
+
+  initListeGenerique({
+    btnId: "btn-charger-effectuer",
+    tableBodySelector: "#table-effectuer tbody",
+    url: "http://localhost:3000/api/effectuer",
+    idField: "id_effectuer",
+    colonnes: ["id_effectuer", "id_wagon", "id_trajet"]
+  });
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const id = window.location.hash.substring(1) || "welcome";

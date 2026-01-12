@@ -6,29 +6,17 @@ const mysql   = require('mysql2');
 const app  = express();
 const port = 3000;
 
-// ------------- Connexion MySQL -------------
 const db = mysql.createPool({
   host: 'localhost',
-  user: 'root',     // adapte selon ton MySQL
-  password: 'fati.2005', // adapte selon ton MySQL
+  user: 'root',  
+  password: 'fati.2005', 
   database: 'railway_db'
 });
-
-// Pour lire les données des formulaires (POST x-www-form-urlencoded)
-app.use(express.urlencoded({ extended: true }));
-
-// Pour servir index.html, style.css, app-init.js depuis /public
 app.use(express.static('public'));
-
-// Route de test
 app.get('/ping', (req, res) => {
   res.send('Backend Node OK');
 });
 
-/* ============= ROUTES API ============= */
-/* ************* SITE ************* */
-
-// INSERT SITE
 app.post('/api/sites', (req, res) => {
   const { nom_site, type_site, ville } = req.body;
 
@@ -46,7 +34,6 @@ app.post('/api/sites', (req, res) => {
   });
 });
 
-// LISTE SITES
 app.get('/api/sites', (req, res) => {
   const sql = 'SELECT * FROM site';
   db.query(sql, (err, rows) => {
@@ -58,7 +45,7 @@ app.get('/api/sites', (req, res) => {
   });
 });
 
-// DELETE SITE
+
 app.delete('/api/sites/:id', (req, res) => {
   const id = req.params.id;
   const sql = 'DELETE FROM site WHERE id_site = ?';
@@ -74,9 +61,7 @@ app.delete('/api/sites/:id', (req, res) => {
   });
 });
 
-/* ************* DEPOT ************* */
 
-// INSERT DEPOT
 app.post('/api/depots', (req, res) => {
   const { nom_depot, id_site } = req.body;
 
@@ -94,7 +79,6 @@ app.post('/api/depots', (req, res) => {
   });
 });
 
-// LISTE DEPOTS
 app.get('/api/depots', (req, res) => {
   const sql = 'SELECT * FROM depot';
   db.query(sql, (err, rows) => {
@@ -106,7 +90,6 @@ app.get('/api/depots', (req, res) => {
   });
 });
 
-// DELETE DEPOT
 app.delete('/api/depots/:id', (req, res) => {
   const id = req.params.id;
   const sql = 'DELETE FROM depot WHERE id_depot = ?';
@@ -122,9 +105,7 @@ app.delete('/api/depots/:id', (req, res) => {
   });
 });
 
-/* ************* WAGON ************* */
 
-// INSERT WAGON
 app.post('/api/wagons', (req, res) => {
   const { capacite, statut, type } = req.body;
 
@@ -142,7 +123,7 @@ app.post('/api/wagons', (req, res) => {
   });
 });
 
-// LISTE WAGONS
+
 app.get('/api/wagons', (req, res) => {
   const sql = 'SELECT * FROM wagon';
   db.query(sql, (err, rows) => {
@@ -154,7 +135,7 @@ app.get('/api/wagons', (req, res) => {
   });
 });
 
-// DELETE WAGON
+
 app.delete('/api/wagons/:id', (req, res) => {
   const id = req.params.id;
   const sql = 'DELETE FROM wagon WHERE id_wagon = ?';
@@ -170,9 +151,7 @@ app.delete('/api/wagons/:id', (req, res) => {
   });
 });
 
-/* ************* CONDUCTEUR ************* */
 
-// INSERT CONDUCTEUR
 app.post('/api/conducteurs', (req, res) => {
   const { nom, prenom, telephone } = req.body;
 
@@ -190,7 +169,6 @@ app.post('/api/conducteurs', (req, res) => {
   });
 });
 
-// LISTE CONDUCTEURS
 app.get('/api/conducteurs', (req, res) => {
   const sql = 'SELECT * FROM conducteur';
   db.query(sql, (err, rows) => {
@@ -202,7 +180,6 @@ app.get('/api/conducteurs', (req, res) => {
   });
 });
 
-// DELETE CONDUCTEUR
 app.delete('/api/conducteurs/:id', (req, res) => {
   const id = req.params.id;
   const sql = 'DELETE FROM conducteur WHERE id_conducteur = ?';
@@ -218,9 +195,6 @@ app.delete('/api/conducteurs/:id', (req, res) => {
   });
 });
 
-/* ************* TRAJET ************* */
-
-// INSERT TRAJET
 app.post('/api/trajets', (req, res) => {
   const { date_depart, date_arrivee, distance, id_site_depart, id_site_arrivee } = req.body;
 
@@ -241,7 +215,6 @@ app.post('/api/trajets', (req, res) => {
   });
 });
 
-// LISTE TRAJETS
 app.get('/api/trajets', (req, res) => {
   const sql = 'SELECT * FROM trajet';
   db.query(sql, (err, rows) => {
@@ -253,7 +226,6 @@ app.get('/api/trajets', (req, res) => {
   });
 });
 
-// DELETE TRAJET
 app.delete('/api/trajets/:id', (req, res) => {
   const id = req.params.id;
   const sql = 'DELETE FROM trajet WHERE id_trajet = ?';
@@ -269,9 +241,6 @@ app.delete('/api/trajets/:id', (req, res) => {
   });
 });
 
-/* ************* INCIDENT ************* */
-
-// INSERT INCIDENT + ALERTE auto
 app.post('/api/incidents', (req, res) => {
   const { date_incident, gravite, statut, id_wagon } = req.body;
 
@@ -304,8 +273,6 @@ app.post('/api/incidents', (req, res) => {
     });
   });
 });
-
-// LISTE INCIDENTS
 app.get('/api/incidents', (req, res) => {
   const sql = 'SELECT * FROM incident';
   db.query(sql, (err, rows) => {
@@ -317,7 +284,6 @@ app.get('/api/incidents', (req, res) => {
   });
 });
 
-// DELETE INCIDENT
 app.delete('/api/incidents/:id', (req, res) => {
   const id = req.params.id;
   const sql = 'DELETE FROM incident WHERE id_incident = ?';
@@ -333,9 +299,6 @@ app.delete('/api/incidents/:id', (req, res) => {
   });
 });
 
-/* ************* ALERTE ************* */
-
-// INSERT ALERTE seule (optionnel)
 app.post('/api/alertes', (req, res) => {
   const { date_alerte, id_incident } = req.body;
 
@@ -353,7 +316,6 @@ app.post('/api/alertes', (req, res) => {
   });
 });
 
-// LISTE ALERTES
 app.get('/api/alertes', (req, res) => {
   const sql = 'SELECT * FROM alerte';
   db.query(sql, (err, rows) => {
@@ -365,7 +327,7 @@ app.get('/api/alertes', (req, res) => {
   });
 });
 
-// DELETE ALERTE
+
 app.delete('/api/alertes/:id', (req, res) => {
   const id = req.params.id;
   const sql = 'DELETE FROM alerte WHERE id_alerte = ?';
@@ -381,7 +343,142 @@ app.delete('/api/alertes/:id', (req, res) => {
   });
 });
 
-/* ======================================= */
+app.post('/api/stocker', (req, res) => {
+  const { id_depot, id_wagon } = req.body;
+
+  if (!id_depot || !id_wagon) {
+    return res.status(400).send("Champs obligatoires manquants");
+  }
+
+  const sql = 'INSERT INTO stocker (id_depot, id_wagon) VALUES (?, ?)';
+  db.query(sql, [id_depot, id_wagon], (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("Erreur lors de l'insertion de la relation stocker");
+    }
+    res.redirect('/#welcome');
+  });
+});
+
+app.get('/api/stocker', (req, res) => {
+  const sql = `
+    SELECT s.id_stocker, s.id_depot, s.id_wagon
+    FROM stocker s
+  `;
+  db.query(sql, (err, rows) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("Erreur lors de la récupération de stocker");
+    }
+    res.json(rows);
+  });
+});
+
+
+app.delete('/api/stocker/:id', (req, res) => {
+  const id = req.params.id;
+  const sql = 'DELETE FROM stocker WHERE id_stocker = ?';
+  db.query(sql, [id], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("Erreur lors de la suppression de stocker");
+    }
+    if (result.affectedRows === 0) {
+      return res.status(404).send("Relation stocker introuvable");
+    }
+    res.status(204).send();
+  });
+});
+
+app.post('/api/conduire', (req, res) => {
+  const { id_conducteur, id_wagon } = req.body;
+
+  if (!id_conducteur || !id_wagon) {
+    return res.status(400).send("Champs obligatoires manquants");
+  }
+
+  const sql = 'INSERT INTO conduire (id_conducteur, id_wagon) VALUES (?, ?)';
+  db.query(sql, [id_conducteur, id_wagon], (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("Erreur lors de l'insertion de la relation conduire");
+    }
+    res.redirect('/#welcome');
+  });
+});
+
+app.get('/api/conduire', (req, res) => {
+  const sql = 'SELECT * FROM conduire';
+  db.query(sql, (err, rows) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("Erreur lors de la récupération de conduire");
+    }
+    res.json(rows);
+  });
+});
+
+app.delete('/api/conduire/:id', (req, res) => {
+  const id = req.params.id;
+  const sql = 'DELETE FROM conduire WHERE id_conduite = ?';
+  db.query(sql, [id], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("Erreur lors de la suppression de conduire");
+    }
+    if (result.affectedRows === 0) {
+      return res.status(404).send("Relation conduire introuvable");
+    }
+    res.status(204).send();
+  });
+});
+
+/* ************* EFFECTUER (WAGON–TRAJET) ************* */
+
+app.post('/api/effectuer', (req, res) => {
+  const { id_wagon, id_trajet } = req.body;
+
+  if (!id_wagon || !id_trajet) {
+    return res.status(400).send("Champs obligatoires manquants");
+  }
+
+  const sql = 'INSERT INTO effectuer (id_wagon, id_trajet) VALUES (?, ?)';
+  db.query(sql, [id_wagon, id_trajet], (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("Erreur lors de l'insertion de la relation effectuer");
+    }
+    res.redirect('/#welcome');
+  });
+});
+
+app.get('/api/effectuer', (req, res) => {
+  const sql = 'SELECT * FROM effectuer';
+  db.query(sql, (err, rows) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("Erreur lors de la récupération de effectuer");
+    }
+    res.json(rows);
+  });
+});
+
+app.delete('/api/effectuer/:id', (req, res) => {
+  const id = req.params.id;
+  const sql = 'DELETE FROM effectuer WHERE id_effectuer = ?';
+  db.query(sql, [id], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("Erreur lors de la suppression de effectuer");
+    }
+    if (result.affectedRows === 0) {
+      return res.status(404).send("Relation effectuer introuvable");
+    }
+    res.status(204).send();
+  });
+});
+
+
 
 app.listen(port, () => {
   console.log(`Serveur Node démarré sur http://localhost:${port}`);
