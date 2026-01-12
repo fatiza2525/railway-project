@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestion ferroviaire</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app-init.js" defer></script>
+</head>
+<body>
+
+<header>
+  <h1>Gestion ferroviaire</h1>
+  <p>Gestion des sites, dépôts, wagons, conducteurs, trajets, incidents et alertes.</p>
+</header>
+
+<div id="layout">
+
+  <aside id="sidebar">
+    <nav>
+      <ul>
+        <li><a href="#" data-section="welcome">Accueil</a></li>
+        <li><a href="#" data-section="site">SITE</a></li>
+        <li><a href="#" data-section="liste-sites">Liste Sites</a></li>
+
+        <li><a href="#" data-section="depot">DEPOT</a></li>
+        <li><a href="#" data-section="liste-depots">Liste Depots</a></li>
+
+        <li><a href="#" data-section="wagon">WAGON</a></li>
+        <li><a href="#" data-section="liste-wagons">Liste Wagons</a></li>
+
+        <li><a href="#" data-section="conducteur">CONDUCTEUR</a></li>
+        <li><a href="#" data-section="liste-conducteurs">Liste Conducteurs</a></li>
+
+        <li><a href="#" data-section="trajet">TRAJET</a></li>
+        <li><a href="#" data-section="liste-trajets">Liste Trajets</a></li>
+
+        <li><a href="#" data-section="incident">INCIDENT</a></li>
+        <li><a href="#" data-section="liste-incidents">Liste Incidents</a></li>
+
+        <li><a href="#" data-section="alerte">ALERTE</a></li>
+        <li><a href="#" data-section="liste-alertes">Liste Alertes</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main id="content">
+
+    <!-- ACCUEIL -->
+    <section id="welcome">
+      <h2>Accueil</h2>
+      <p>Choisissez une entité dans le menu à gauche pour ajouter ou consulter les données.</p>
+    </section>
+
+    <!-- =================== SITE =================== -->
+    <section id="site">
+      <h2>Ajouter un site</h2>
+      <form method="post" action="http://localhost:3000/api/sites">
+        <label>Nom site :
+          <input type="text" name="nom_site" required>
+        </label>
+        <label>Type site :
+          <input type="text" name="type_site" required>
+        </label>
+        <label>Ville :
+          <input type="text" name="ville" required>
+        </label>
+        <button type="submit">Enregistrer site</button>
+      </form>
+    </section>
+
+    <section id="liste-sites">
+      <h2>Liste des sites</h2>
+      <button id="btn-charger-sites">Charger les sites</button>
+      <table id="table-sites" border="1">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Type</th>
+          <th>Ville</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- =================== DEPOT =================== -->
+    <section id="depot">
+      <h2>Ajouter un dépôt</h2>
+      <form method="post" action="http://localhost:3000/api/depots">
+        <label>Nom dépôt :
+          <input type="text" name="nom_depot" required>
+        </label>
+        <label>ID site (clé étrangère) :
+          <input type="number" name="id_site" required>
+        </label>
+        <button type="submit">Enregistrer dépôt</button>
+      </form>
+    </section>
+
+    <section id="liste-depots">
+      <h2>Liste des dépôts</h2>
+      <button id="btn-charger-depots">Charger les dépôts</button>
+      <table id="table-depots" border="1">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom dépôt</th>
+          <th>ID site</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- =================== WAGON =================== -->
+    <section id="wagon">
+      <h2>Ajouter un wagon</h2>
+      <form method="post" action="http://localhost:3000/api/wagons">
+        <label>Capacité :
+          <input type="number" name="capacite" required>
+        </label>
+        <label>Statut :
+          <input type="text" name="statut" required>
+        </label>
+        <label>Type :
+          <input type="text" name="type" required>
+        </label>
+        <button type="submit">Enregistrer wagon</button>
+      </form>
+    </section>
+
+    <section id="liste-wagons">
+      <h2>Liste des wagons</h2>
+      <button id="btn-charger-wagons">Charger les wagons</button>
+      <table id="table-wagons" border="1">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Capacité</th>
+          <th>Statut</th>
+          <th>Type</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- =================== CONDUCTEUR =================== -->
+    <section id="conducteur">
+      <h2>Ajouter un conducteur</h2>
+      <form method="post" action="http://localhost:3000/api/conducteurs">
+        <label>Nom :
+          <input type="text" name="nom" required>
+        </label>
+        <label>Prénom :
+          <input type="text" name="prenom" required>
+        </label>
+        <label>Téléphone :
+          <input type="text" name="telephone" required>
+        </label>
+        <button type="submit">Enregistrer conducteur</button>
+      </form>
+    </section>
+
+    <section id="liste-conducteurs">
+      <h2>Liste des conducteurs</h2>
+      <button id="btn-charger-conducteurs">Charger les conducteurs</button>
+      <table id="table-conducteurs" border="1">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Téléphone</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- =================== TRAJET =================== -->
+    <section id="trajet">
+      <h2>Ajouter un trajet</h2>
+      <form method="post" action="http://localhost:3000/api/trajets">
+        <label>Date départ :
+          <input type="date" name="date_depart" required>
+        </label>
+        <label>Date arrivée :
+          <input type="date" name="date_arrivee" required>
+        </label>
+        <label>Distance :
+          <input type="number" name="distance" required>
+        </label>
+        <label>ID site départ :
+          <input type="number" name="id_site_depart" required>
+        </label>
+        <label>ID site arrivée :
+          <input type="number" name="id_site_arrivee" required>
+        </label>
+        <button type="submit">Enregistrer trajet</button>
+      </form>
+    </section>
+
+    <section id="liste-trajets">
+      <h2>Liste des trajets</h2>
+      <button id="btn-charger-trajets">Charger les trajets</button>
+      <table id="table-trajets" border="1">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date départ</th>
+          <th>Date arrivée</th>
+          <th>Distance</th>
+          <th>ID site départ</th>
+          <th>ID site arrivée</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- =================== INCIDENT =================== -->
+    <section id="incident">
+      <h2>Ajouter un incident</h2>
+      <form method="post" action="http://localhost:3000/api/incidents">
+        <label>Date incident :
+          <input type="date" name="date_incident" required>
+        </label>
+        <label>Gravité :
+          <input type="text" name="gravite" required>
+        </label>
+        <label>Statut :
+          <input type="text" name="statut" required>
+        </label>
+        <label>ID wagon :
+          <input type="number" name="id_wagon" required>
+        </label>
+        <button type="submit">Enregistrer incident</button>
+      </form>
+      <p>Une alerte est créée automatiquement pour chaque incident.</p>
+    </section>
+
+    <section id="liste-incidents">
+      <h2>Liste des incidents</h2>
+      <button id="btn-charger-incidents">Charger les incidents</button>
+      <table id="table-incidents" border="1">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date incident</th>
+          <th>Gravité</th>
+          <th>Statut</th>
+          <th>ID wagon</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- =================== ALERTE =================== -->
+    <section id="alerte">
+      <h2>Ajouter une alerte (optionnel)</h2>
+      <form method="post" action="http://localhost:3000/api/alertes">
+        <label>Date alerte :
+          <input type="date" name="date_alerte" required>
+        </label>
+        <label>ID incident :
+          <input type="number" name="id_incident" required>
+        </label>
+        <button type="submit">Enregistrer alerte</button>
+      </form>
+      <p>En général, les alertes sont créées automatiquement lors de la création d’un incident.</p>
+    </section>
+
+    <section id="liste-alertes">
+      <h2>Liste des alertes</h2>
+      <button id="btn-charger-alertes">Charger les alertes</button>
+      <table id="table-alertes" border="1">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date alerte</th>
+          <th>ID incident</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+
+</body>
+</html>

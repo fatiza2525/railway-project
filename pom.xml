@@ -1,0 +1,25 @@
+<aside id="sidebar">
+  <nav>
+    <ul>
+      <li><a href="#" data-section="welcome">Accueil</a></li>
+      <li><a href="#" data-section="depot">DEPOT</a></li>
+      <li><a href="#" data-section="site">SITE</a></li>
+      <li><a href="#" data-section="wagon">WAGON</a></li>
+      <li><a href="#" data-section="conducteur">CONDUCTEUR</a></li>
+      <li><a href="#" data-section="trajet">TRAJET</a></li>
+      <li><a href="#" data-section="incident">INCIDENT</a></li>
+      <li><a href="#" data-section="alerte">ALERTE</a></li>
+    </ul>
+  </nav>
+</aside>
+
+<main id="content">
+  <section id="welcome">...</section>
+  <section id="depot">...</section>
+  <section id="site">...</section>
+  <section id="wagon">...</section>
+  <section id="conducteur">...</section>
+  <section id="trajet">...</section>
+  <section id="incident">...</section>
+  <section id="alerte">...</section>
+</main>
