@@ -12,6 +12,8 @@ const db = mysql.createPool({
   password: 'fati.2005', 
   database: 'railway_db'
 });
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); 
 app.use(express.static('public'));
 app.get('/ping', (req, res) => {
   res.send('Backend Node OK');
